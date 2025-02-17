@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">FoodApps</string>
+    <string name="welcome_message">Welcome to My App</string>
+    <string name="welcome_description">Explore the world of possibilities with us!</string>
+    <string name="welcome_getStart">Get Started</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="label_submit">Submit</string>
+    <string name="login_title">Log in</string>
+    <string name="error_bad_email_format">Bad email format</string>
+    <string name="error_bad_password_format">Bad password. Type min 7 chars, uppercase and digit</string>
+    <string name="error_invalid_credentials">Invalid credentials. Try again</string>
+    <string name="cd_logo">App Logo</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="email_hint">email@company.com</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="password_hint">type min 8 chars</string>
+    <string name="cd_show_password">Show Password</string>
+    <string name="cd_hide_password">Hide Password</string>
+    <string name="label_user_name">Name</string>
+    <string name="user_name_hint">name</string>
+    <string name="title_hello">Hello again!</string>
+    <string name="str_search">Search</string>
+    <string name="str_login_button">Login</string>
+    <string name="str_forgot_password">Forgot your password?</string>
+    <string name="str_dont_have_account">Don\'t have an account?</string>
+    <string name="str_sign_up">Sign up</string>
+    <string name="home_screen_title">The best restaurants</string>
+    <string name="str_category">Category</string>
+    <string name="str_show_all">Show all</string>
+
+</resources>
