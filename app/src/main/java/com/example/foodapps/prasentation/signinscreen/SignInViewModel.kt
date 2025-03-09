@@ -1,5 +1,6 @@
 package com.example.foodapps.prasentation.signinscreen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.foodapps.domain.usecases.login_case.LoginInvokeCase
@@ -9,6 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.foodapps.domain.repository.Result
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
@@ -29,6 +33,7 @@ class SignInViewModel @Inject constructor(
                 }
             }
         }
+
     }
 
 }

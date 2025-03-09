@@ -27,5 +27,9 @@
     <string name="home_screen_title">The best restaurants</string>
     <string name="str_category">Category</string>
     <string name="str_show_all">Show all</string>
+    <string name="str_profile">Profile</string>
+    <string name="str_setting">Setting</string>
+    <string name="iranian_food_title">Iranian food</string>
+    <string name="back_button_desc">back_button</string>
 
 </resources>

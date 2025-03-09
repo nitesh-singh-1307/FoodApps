@@ -8,8 +8,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.foodapps.common.LoadingScreen
 import com.example.foodapps.domain.usecases.app_entry.AppEntryUseCases
-import com.example.foodapps.prasentation.bottomNavigator.BottomNavigate
-import com.example.foodapps.prasentation.homescreen.components.HomeScreen
+import com.example.foodapps.prasentation.bottomNavigator.components.BottomNavigationScreen
+import com.example.foodapps.prasentation.fevoriteScreen.FavoriteScreen
+import com.example.foodapps.prasentation.foodListScreen.components.FoodsMenuScreen
+import com.example.foodapps.prasentation.notifications.NotificationScreen
 import com.example.foodapps.prasentation.signinscreen.SignInViewModel
 import com.example.foodapps.prasentation.signinscreen.components.SignInScreen
 import com.example.foodapps.prasentation.welcomescreen.WelcomeScreenViewModel
@@ -34,8 +36,8 @@ fun NavGraph(
                             popUpTo(Route.LoadingScreen.route) { inclusive = true }
                         }
                     }else{
-                        navController.navigate(Route.SignInScreen.route) {
-                            popUpTo(Route.LoadingScreen.route) { inclusive = true }
+                        navController.navigate(Route.BottomNavigationScreen.route) {
+                            popUpTo(Route.BottomNavigationScreen.route) { inclusive = true }
                         }
                     }
                 }
@@ -56,13 +58,22 @@ fun NavGraph(
         composable(route = Route.SignInScreen.route) {
             val viewModel: SignInViewModel = hiltViewModel()
             SignInScreen(viewModel,navController)
-
+        }
+        composable(route = Route.FoodListScreen.route) {
+            FoodsMenuScreen()
+        }
+        composable(route = Route.FavoriteScreen.route) {
+            FavoriteScreen()
+        }
+        composable(route = Route.NotificationScreen.route) {
+            NotificationScreen()
         }
 
-        composable(route = Route.HomeScreen.route) {
+        composable(route = Route.BottomNavigationScreen.route) {
 //            val viewModel: SignInViewModel = hiltViewModel()
 //            NavigationDrawer(navController)
-            HomeScreen(navController)
+            BottomNavigationScreen(navController)
         }
+
     }
 }

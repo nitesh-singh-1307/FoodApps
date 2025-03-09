@@ -23,7 +23,6 @@ fun LoadingScreen(
 
     LaunchedEffect(Unit) {
         readAppEntry.readAppEntry().collect{
-//            it.toString()
             isChecked = it
             onLoadingComplete(it)
         }

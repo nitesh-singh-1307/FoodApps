@@ -24,7 +24,6 @@ import com.example.foodapps.ui.theme.FoodAppsTheme
     selectedItem: Int,
     onItemClick: (Int) -> Unit
 ) {
-
     NavigationBar(
         modifier = Modifier.fillMaxWidth(),
         containerColor = AppTheme.colorScheme.white,
@@ -44,7 +43,7 @@ import com.example.foodapps.ui.theme.FoodAppsTheme
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = AppTheme.colorScheme.loginTitle,
                     unselectedIconColor = colorResource(id = R.color.black),
-                ),
+                )
             )
         }
     }
