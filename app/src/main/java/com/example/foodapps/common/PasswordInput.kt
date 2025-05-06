@@ -13,10 +13,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.foodapps.R
 import com.example.foodapps.ui.theme.AppTheme
 
@@ -28,7 +28,8 @@ fun PasswordInput(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     onPasswordChanged: (newValue: String) -> Unit,
-    testTag: String = "password"
+    testTag: String = "password",
+    focusRequester: FocusRequester
 ) {
     var isPasswordHidden by remember { mutableStateOf(true) }
     val visualTransformation = if (isPasswordHidden) {

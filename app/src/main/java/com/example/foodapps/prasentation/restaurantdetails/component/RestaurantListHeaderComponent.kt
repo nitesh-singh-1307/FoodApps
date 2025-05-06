@@ -43,7 +43,7 @@ import com.example.foodapps.common.CircularButtonWithFavoriteIcon
 import com.example.foodapps.ui.theme.FoodAppsTheme
 
 // Constants
-private val HeaderHeight = 200.dp
+private val HeaderHeight = 250.dp
 private val HorizontalPadding = 16.dp
 private val BackButtonPadding = PaddingValues(all = 8.dp)
 
@@ -55,27 +55,21 @@ fun RestaurantListHeaderDetails(onBackClick: () -> Unit, modifier: Modifier = Mo
         derivedStateOf { boxHeight * 0.5f } // 20% of box height
     }
     val density = LocalDensity.current
-
-        Box(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(HeaderHeight) // Custom size
-                .background(MaterialTheme.colorScheme.background)
-                .onSizeChanged { layoutCoordinates ->
-                    boxHeight = with(density) { layoutCoordinates.height.toDp() }
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            HeaderBackgroundDetails()
-            BackButtonDetails(onBackClick)
-            HeaderTextDetails()
-            FavoriteButton(offsetY)
-        }
-
-
-//    }
-
-
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(HeaderHeight) // Custom size
+            .background(MaterialTheme.colorScheme.background)
+            .onSizeChanged { layoutCoordinates ->
+                boxHeight = with(density) { layoutCoordinates.height.toDp() }
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        HeaderBackgroundDetails()
+        BackButtonDetails(onBackClick = onBackClick)
+        HeaderTextDetails()
+        FavoriteButton(offsetY)
+    }
 }
 
 @Composable

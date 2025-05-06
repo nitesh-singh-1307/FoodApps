@@ -24,6 +24,7 @@
     <string name="str_forgot_password">Forgot your password?</string>
     <string name="str_dont_have_account">Don\'t have an account?</string>
     <string name="str_sign_up">Sign up</string>
+    <string name="str_sign_in">Sign in</string>
     <string name="home_screen_title">The best restaurants</string>
     <string name="str_category">Category</string>
     <string name="str_show_all">Show all</string>
@@ -31,5 +32,39 @@
     <string name="str_setting">Setting</string>
     <string name="iranian_food_title">Iranian food</string>
     <string name="back_button_desc">back_button</string>
+    <string name="continue_shopping">Continue Shopping</string>
+    <string name="go_to_orders">Go to Orders</string>
+    <string name="order_success_icon_desc">Order success checkmark icon</string>
+    <string name="order_success_default_title">Order Successful</string>
+    <string name="order_success_default_status">Check the status of your order in the \'Orders\' section.</string>
+    <string name="welcome_header">WELCOME!</string>
+    <string name="name_label">Name</string>
+    <string name="name_placeholder">Enter your name</string>
+
+    <string name="navigate_back_desc">back_icon</string>
+    <string name="email_label">Email</string>
+    <string name="email_placeholder">Enter your name</string>
+    <string name="password_label">Password</string>
+    <string name="password_placeholder">Enter your password</string>
+    <string name="create_account_button">Create account</string>
+    <string name="have_account_prompt">Already have an account?</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_in_image_desc">sing in banner</string>
+    <string name="price_range">Price Range</string>
+    <string name="categories">Categories</string>
+    <string name="options">Options</string>
+    <string name="selected">Selected</string>
+    <string name="not_selected">Not selected</string>
+    <string name="more_options">More options ></string>
+    <string name="filter_options">Filter Options</string>
+    <string name="search_hint">Search...</string>
+    <string name="restaurant_image_desc">Image of %s restaurant</string>
+    <string name="free_delivery">Free delivery</string>
+    <string name="menu_title">Menu</string>
+
+    <string name="header_background_desc">Restaurant header image</string>
+    <string name="location_icon_desc">Location icon</string>
+    <string name="favorite_button_desc">Toggle favorite</string>
+    <string name="rating_icon_desc">rating icon</string>
 
 </resources>

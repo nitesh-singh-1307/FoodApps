@@ -1,8 +1,13 @@
 package com.example.foodapps.ui.theme
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -22,6 +27,8 @@ data class AppColorScheme(
     val error: Color,
    val loginTitle : Color,
    val searchText : Color,
+   val brandColor : Color,
+   val scrimColor : Color,
    val white : Color
 ) {
 
@@ -50,7 +57,8 @@ data class AppSize(
     val large: Dp,
     val medium: Dp,
     val normal: Dp,
-    val small: Dp
+    val small: Dp,
+    val extrasmall: Dp
 )
 
 val LocalAppColorScheme = staticCompositionLocalOf {
@@ -65,6 +73,8 @@ val LocalAppColorScheme = staticCompositionLocalOf {
         error = Color.Unspecified,
         loginTitle = Color.Unspecified,
         searchText = Color.Unspecified,
+        brandColor = Color.Unspecified,
+        scrimColor = Color.Unspecified,
         white = Color.Unspecified,
     )
 }
@@ -77,6 +87,15 @@ val LocalAppTypography = staticCompositionLocalOf {
         labelLarge = TextStyle.Default,
         labelNormal = TextStyle.Default,
         labelSmall = TextStyle.Default
+    )
+}
+
+@Composable
+fun DpExample(size: Dp) {
+    Box(
+        modifier = Modifier
+            .size(size) // Use Dp for size
+            .background(Color.Blue)
     )
 }
 
@@ -93,6 +112,7 @@ val LocalAppSize = staticCompositionLocalOf {
         large = Dp.Unspecified,
         medium = Dp.Unspecified,
         normal = Dp.Unspecified,
-        small = Dp.Unspecified
+        small = Dp.Unspecified,
+        extrasmall = Dp.Unspecified,
     )
 }

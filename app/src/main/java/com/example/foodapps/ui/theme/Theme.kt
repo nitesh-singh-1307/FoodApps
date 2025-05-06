@@ -25,7 +25,9 @@ private val darkColorScheme = AppColorScheme(
     error = DarkRed,
     loginTitle = loginTitle,
     searchText = searchText,
-            white = white
+    brandColor = brandColor,
+    scrimColor = brandColor,
+    white = white
 )
 
 private val lightColorScheme = AppColorScheme(
@@ -39,8 +41,10 @@ private val lightColorScheme = AppColorScheme(
     error = LightRed,
     loginTitle = loginTitle,
     searchText = searchText,
+    brandColor = brandColor,
+    scrimColor = brandColor,
     white = white
-    )
+)
 
 private val typography = AppTypography(
     titleLarge = TextStyle(
@@ -82,7 +86,8 @@ private val size = AppSize(
     large = 24.dp,
     medium = 16.dp,
     normal = 12.dp,
-    small = 8.dp
+    small = 8.dp,
+    extrasmall = 4.dp
 )
 
 @Composable

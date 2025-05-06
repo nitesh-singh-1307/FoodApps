@@ -2,6 +2,7 @@ package com.example.foodapps.prasentation.restaurantlistscreen.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,11 +20,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,6 +44,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.foodapps.R
 import com.example.foodapps.common.CircularButtonWithFavoriteIcon
 import com.example.foodapps.data.remote.model.RestaurantList
@@ -55,19 +58,30 @@ private val BackButtonPadding = PaddingValues(all = 8.dp)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RestaurantListScreen() {
-    val restaurants = rememberRestaurants()
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
-    ) {
-        RestaurantListHeader(onBackClick = { /* Handle back button click */ })
-        RestaurantListItem(restaurants = restaurants)
-
+fun RestaurantListScreen(
+    onBackClick: () -> Unit,
+    onSeeMoreClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var restaurants = rememberRestaurants()
+    Scaffold(
+        topBar = {
+            RestaurantListHeader(onBackClick = onBackClick)
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+            RestaurantListItem(restaurants = restaurants ,  onSeeMoreClick = onSeeMoreClick)
+        }
     }
+
 }
+
 
 @Composable
 fun RestaurantListHeader(onBackClick: () -> Unit, modifier: Modifier = Modifier) {
@@ -89,13 +103,14 @@ fun BackButton(onBackClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
             onClick = onBackClick,
-            modifier = Modifier.align(Alignment.TopStart)
+            modifier = Modifier
+                .align(Alignment.TopStart)
                 .padding(BackButtonPadding)
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                painter = painterResource(R.drawable.arrow_back_icon),
                 contentDescription = stringResource(R.string.back_button_desc),
-                tint = Color.White
+                tint = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
@@ -126,23 +141,25 @@ fun HeaderBackground() {
 // Restaurant List Component
 @Composable
 fun RestaurantListItem(
-    restaurants: List<RestaurantList>) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    restaurants: List<RestaurantList>,
+    onSeeMoreClick: () -> Unit,
+) {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         items(restaurants) { restaurant ->
-            RestaurantListItemWithDetails(restaurant = restaurant)
+            RestaurantListItemWithDetails(restaurant = restaurant , onSeeMoreClick = onSeeMoreClick)
         }
     }
 }
 
 // List Item Component
 @Composable
-fun RestaurantListItemWithDetails(restaurant: RestaurantList) {
+fun RestaurantListItemWithDetails(restaurant: RestaurantList , onSeeMoreClick: () -> Unit) {
     var isLiked by remember { mutableStateOf(false) } // Local state
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-            .padding(16.dp)
+            .padding(16.dp).clickable {onSeeMoreClick()}
     ) {
         Row(
             modifier = Modifier
@@ -249,6 +266,9 @@ fun rememberRestaurants(): List<RestaurantList> = remember {
 @Composable
 fun RestaurantItemPreview() {
     FoodAppsTheme {
-        RestaurantListScreen()
+        RestaurantListScreen(
+            onBackClick = { },
+            onSeeMoreClick = { }
+        )
     }
 }

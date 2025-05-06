@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.foodapps.R
+import com.example.foodapps.Screen
 import com.example.foodapps.ui.theme.AppTheme
 import com.example.foodapps.ui.theme.FoodAppsTheme
 
@@ -37,7 +38,7 @@ import com.example.foodapps.ui.theme.FoodAppsTheme
                     Icon(
                         painter = painterResource(id = bottomNavigationItem.icon),
                         contentDescription = null,
-                        modifier = Modifier.size(16.dp),
+                        modifier = Modifier.size(28.dp),
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
@@ -50,7 +51,8 @@ import com.example.foodapps.ui.theme.FoodAppsTheme
 }
 
 data class BottomNavigationItem(
-    @DrawableRes val icon: Int
+    val icon: Int,
+    val route: String
 )
 
 @Preview
@@ -59,10 +61,10 @@ data class BottomNavigationItem(
 fun NewsBottomNavigationPreview() {
     FoodAppsTheme {
     BottomNavigationBar(items = listOf(
-            BottomNavigationItem(icon = R.drawable.home_icon),
-            BottomNavigationItem(icon = R.drawable.list_icon),
-            BottomNavigationItem(icon = R.drawable.favorite_icon),
-            BottomNavigationItem(icon = R.drawable.notification_icon),
+        BottomNavigationItem(icon = R.drawable.home_icon, route = Screen.Discover.route),
+        BottomNavigationItem(icon = R.drawable.list_icon, route = Screen.Orders.route),
+        BottomNavigationItem(icon = R.drawable.favorite_icon, route = Screen.Favorites.route),
+        BottomNavigationItem(icon = R.drawable.notification_icon, route = Screen.Notifications.route),
         ), selectedItem = 0, onItemClick = {})
     }
 }

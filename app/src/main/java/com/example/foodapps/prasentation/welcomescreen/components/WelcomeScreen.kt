@@ -19,9 +19,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.foodapps.R
 import com.example.foodapps.common.PrimaryButton
+import com.example.foodapps.prasentation.signinscreen.components.SignInDimens
 import com.example.foodapps.prasentation.welcomescreen.WelcomeScreenEvent
 import com.example.foodapps.ui.theme.AppTheme
-import kotlin.math.truncate
 
 @Composable
 fun WelcomeScreen(
@@ -64,15 +64,17 @@ fun WelcomeScreen(
                 style = AppTheme.typography.labelNormal
             )
 
-            // Button to proceed or login
             PrimaryButton(
-                modifier = Modifier.fillMaxWidth(),
-                label = stringResource(id = R.string.welcome_getStart),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = SignInDimens.ButtonPadding),
+                label = stringResource(R.string.str_login_button),
                 onClick = {
                     onEvent(WelcomeScreenEvent.SaveAppEntry)
                     onLogin()
                 },
-                enabled = true
+                enabled = true,
+                showLoading = true
             )
 //            Spacer(modifier = Modifier.weight(0.01f))
         }

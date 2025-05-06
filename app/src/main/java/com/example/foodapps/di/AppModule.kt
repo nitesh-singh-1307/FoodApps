@@ -3,14 +3,22 @@ package com.example.foodapps.di
 import android.app.Application
 import com.example.foodapps.data.manger.LocalUserMangerImpl
 import com.example.foodapps.data.remote.FoodApiService
-import com.example.foodapps.data.remote.repository.LoginRepositoryImpl
+import com.example.foodapps.data.remote.repository.AuthRepositoryImpl
+import com.example.foodapps.data.remote.repository.MenuCategoryRepositoryImpl
+import com.example.foodapps.data.remote.repository.RestaurantRepositoryImpl
+import com.example.foodapps.data.remote.repository.UserDataRepositoryImpl
 import com.example.foodapps.domain.manger.LocalUserManager
+import com.example.foodapps.domain.repository.AuthRepository
 import com.example.foodapps.domain.repository.LoginRepository
+import com.example.foodapps.domain.repository.MenuCategoryRepository
+import com.example.foodapps.domain.repository.RestaurantRepository
+import com.example.foodapps.domain.repository.UserDataRepository
 import com.example.foodapps.domain.usecases.app_entry.AppEntryUseCases
 import com.example.foodapps.domain.usecases.app_entry.ReadAppEntry
 import com.example.foodapps.domain.usecases.app_entry.SaveAppEntry
-import com.example.foodapps.domain.usecases.login_case.LoginInvokeCase
+import com.example.foodapps.domain.usecases.login_case.LoginUseCase
 import com.example.foodapps.utils.Constants.BASE_URL
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,11 +28,44 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository =
+        AuthRepositoryImpl(firebaseAuth)
+
+    @Provides
+    @Singleton
+    fun provideUserDataRepository(firestore: FirebaseFirestore): UserDataRepository =
+        UserDataRepositoryImpl(firestore)
+
+    @Provides
+    @Singleton // Repository can be singleton if it doesn't hold changing state
+    fun provideMenuCategoryRepository(firestore: FirebaseFirestore): MenuCategoryRepository {
+        return MenuCategoryRepositoryImpl(firestore)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRestaurantRepository(firestore: FirebaseFirestore): RestaurantRepository {
+        return RestaurantRepositoryImpl(firestore)
+    }
+
     @Provides
     @Singleton
     fun provideLocalUserManager(
@@ -67,14 +108,4 @@ fun  provideOkHttpClient() : OkHttpClient{
         return retrofit.create(FoodApiService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun provideLoginRepository(foodApi: FoodApiService): LoginRepository{
-        return LoginRepositoryImpl(foodApi)
-    }
-    @Provides
-    @Singleton
-    fun provideLoginUseCase(loginRepository: LoginRepository): LoginInvokeCase{
-        return LoginInvokeCase(loginRepository)
-    }
 }

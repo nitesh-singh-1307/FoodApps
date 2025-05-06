@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
@@ -36,9 +35,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import com.example.foodapps.R
-import com.example.foodapps.prasentation.nvgraph.Route
+import com.example.foodapps.Screen
 import com.example.foodapps.ui.theme.AppTheme
 import com.example.foodapps.ui.theme.FoodAppsTheme
 
@@ -114,13 +112,13 @@ fun DrawerContent(onItemSelected: (String) -> Unit) {
                 NavigationItem(
                     title = stringResource(id = R.string.str_profile),
                     icon = Icons.Default.Person,
-                    route = Route.ProfileScreen.route,
+                    route = Screen.Login.route,
                     onItemSelected = onItemSelected
                 )
                 NavigationItem(
                     title = stringResource(id = R.string.str_setting),
                     icon = Icons.Default.Settings,
-                    route = Route.SettingScreen.route,
+                    route = Screen.Login.route,
                     onItemSelected
                 )
             }

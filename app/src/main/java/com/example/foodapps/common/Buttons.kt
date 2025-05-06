@@ -1,23 +1,20 @@
 package com.example.foodapps.common
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.foodapps.ui.theme.AppTheme
-import com.example.foodapps.ui.theme.FoodAppsTheme
 
 @Composable
 fun PrimaryButton(
     modifier: Modifier = Modifier,
     label: String,
     onClick: () -> Unit,
-    enabled: Boolean
+    enabled: Boolean,
+    showLoading: Boolean
 ) {
     Button(
         modifier = modifier.padding(horizontal = AppTheme.size.small),
