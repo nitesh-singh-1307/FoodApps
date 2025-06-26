@@ -30,6 +30,10 @@ class RestaurantRepositoryImpl @Inject constructor(
             .get().asFlow()
             .map { querySnapshot ->
                 val categoryList = mutableListOf<RestaurantFireBase>()
+
+                if (querySnapshot.documents.isNotEmpty()) {
+                    Log.d(TAG, "ResturantsDetailsImageUrl::::::: ${querySnapshot.documents[0].getString("address")}")
+                }
                 for (document in querySnapshot.documents) {
                     val address = document.getString("address")
                     val is_available = document.getBoolean("is_available")
@@ -41,7 +45,7 @@ class RestaurantRepositoryImpl @Inject constructor(
                         id = document.id.takeIf { it.isNotEmpty() } ?: continue,
                         name = name ?: "Unknown Name",
                         address = address ?: "Unknown Address",
-                        is_available = is_available?:false,
+                        is_available = is_available ?: false,
                         rating = rating ?: "0.0",
                         image_url = image ?: "Unknown Image",
                     )
@@ -52,12 +56,7 @@ class RestaurantRepositoryImpl @Inject constructor(
             }
             .catch { exception ->
                 Log.e("FirestoreRepo", "Error fetching categories: ", exception)
-//                emit(emptyList())
             }.flowOn(Dispatchers.IO)
-    }
-
-    inline fun <reified T> DocumentSnapshot.toObject(): T? {
-        return this.toObject(T::class.java)
     }
 
     private fun Task<QuerySnapshot>.asFlow(): Flow<QuerySnapshot> =

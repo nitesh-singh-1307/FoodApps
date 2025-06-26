@@ -24,6 +24,7 @@ android {
     defaultConfig {
         applicationId = "com.example.foodapps"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -93,6 +94,7 @@ dependencies {
     implementation(libs.composeMaterial)
 //    implementation(libs.material3)
     implementation(libs.androidx.compose.testing)
+    implementation(libs.firebase.messaging.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -108,7 +110,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.coil.kt.compose)
-
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
 
     // Material3
 //    implementation(libs.material3WindowSize)

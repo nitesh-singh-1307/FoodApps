@@ -28,6 +28,8 @@ firebase-bom = "33.12.0"
 firebase-auth = "23.2.0"
 firebase-firestore = "24.7.0"
 lifecycle-runtime-compose = "2.8.7"
+firebaseMessagingKtx = "24.1.1"
+
 
 
 
@@ -71,6 +73,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebase-auth" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebase-firestore" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 
 [bundles]
 #composes = ["composeBom"]

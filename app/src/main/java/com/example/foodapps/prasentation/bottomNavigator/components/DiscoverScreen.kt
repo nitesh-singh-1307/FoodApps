@@ -1,5 +1,6 @@
 package com.example.foodapps.prasentation.bottomNavigator.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,40 +15,54 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.foodapps.AppNavHost
 import com.example.foodapps.R
 import com.example.foodapps.Screen
-import com.example.foodapps.prasentation.fevoriteScreen.FavoritesScreen
+import com.example.foodapps.common.AuthManager
+import com.example.foodapps.common.AuthManager.isUserLoggedIn
+import com.example.foodapps.prasentation.fevoriteScreen.component.RestaurantFevoriteListScreen
 import com.example.foodapps.prasentation.homescreen.HomeScreen
 import com.example.foodapps.prasentation.nevigationdrawerescreen.DrawerContent
+import com.example.foodapps.prasentation.notifications.NotificationViewModel
 import com.example.foodapps.prasentation.notifications.NotificationsScreen
-import com.example.foodapps.prasentation.orderScreen.OrdersScreen
-import com.example.foodapps.ui.theme.AppTheme
-import com.example.foodapps.ui.theme.FoodAppsTheme
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiscoverScreen(
-    navController: NavHostController,
-    onNavigateToScreen: (String) -> Unit
+    onNavigateToResturantDetails: (String) -> Unit,
+    onNavigateToFilter: () -> Unit,
 ) {
+    val notificationViewModel: NotificationViewModel = hiltViewModel(/* pass NavBackStackEntry if needed for shared scope */)
+    val messages = notificationViewModel.messages.collectAsState(initial = emptyList()).value
+    val messageCount = messages.size
+
+    val navController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+    Log.d("DiscoverScreen", "currentRoute::::: $currentRoute")
+
     val bottomNavigationItems = listOf(
-        BottomNavigationItem(icon = R.drawable.home_icon, route = Screen.Discover.route),
+        BottomNavigationItem(icon = R.drawable.home_icon, route = Screen.HomeScreen.route),
         BottomNavigationItem(icon = R.drawable.list_icon, route = Screen.Orders.route),
         BottomNavigationItem(icon = R.drawable.favorite_icon, route = Screen.Favorites.route),
         BottomNavigationItem(
@@ -56,7 +71,6 @@ fun DiscoverScreen(
         )
     )
 
-    // Calculate 50% of the screen width
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -64,6 +78,7 @@ fun DiscoverScreen(
                 onItemSelected = { route ->
                     navController.navigate(route) {
                         launchSingleTop = true
+                        restoreState = true
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
@@ -74,7 +89,6 @@ fun DiscoverScreen(
         }
     ) {
         Scaffold(
-            modifier = Modifier.background(AppTheme.colorScheme.background),
             topBar = {
                 TopAppBar(
                     title = {},
@@ -102,21 +116,30 @@ fun DiscoverScreen(
                                 saveState = true
                             }
                         }
-                    }
+                    },
+                    notificationBadgeCount = if (currentRoute == Screen.Notifications.route) messageCount else 0
                 )
             }
-        ) { paddingValues ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
+        ) { innerPadding ->
+            NavHost(
+                navController = navController,
+                startDestination = Screen.HomeScreen.route,
+                modifier = Modifier.padding(innerPadding)
             ) {
-                // Main content based on current route
-                when (currentRoute) {
-                    Screen.Discover.route -> HomeScreen(navController = navController)
-                    Screen.Orders.route -> OrdersScreen()
-                    Screen.Favorites.route -> FavoritesScreen()
-                    Screen.Notifications.route -> NotificationsScreen()
+                composable(route = Screen.HomeScreen.route) {
+                    HomeScreen(
+                        onNavigateToResturantDetails = onNavigateToResturantDetails,
+                        onNavigateToFilter = onNavigateToFilter,
+                    )
+                }
+                composable(route = Screen.Orders.route) {
+//                    OrdersScreen(navController)
+                }
+                composable(route = Screen.Favorites.route) {
+                    RestaurantFevoriteListScreen()
+                }
+                composable(route = Screen.Notifications.route) {
+                    NotificationsScreen()
                 }
             }
         }
@@ -124,15 +147,16 @@ fun DiscoverScreen(
 }
 
 
+
+
 @Composable
 @Preview(showBackground = true)
 private fun BottomPreview() {
     val navController = rememberNavController()
 
-    FoodAppsTheme {
-        DiscoverScreen(
-            navController = navController,
-            onNavigateToScreen = {}
-        )
-    }
+//    FoodAppsTheme {
+//        DiscoverScreen(
+//
+//        )
+//    }
 }

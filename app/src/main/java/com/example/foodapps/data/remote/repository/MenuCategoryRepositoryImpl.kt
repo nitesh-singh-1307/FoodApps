@@ -25,6 +25,7 @@ class MenuCategoryRepositoryImpl @Inject constructor(
             .map { querySnapshot ->
                 val categoryList = mutableListOf<CategoryItem>()
                 for (document in querySnapshot.documents) {
+                    Log.d("FirestoreRepo", "Document: $document")
                     val name = document.getString("category_name")
                     val image = document.getString("category_image")
                     if (name != null && image != null) {

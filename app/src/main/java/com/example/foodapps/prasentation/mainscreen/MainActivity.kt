@@ -4,7 +4,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import com.example.foodapps.AppRoot
+import com.example.foodapps.MyApp
+import com.example.foodapps.common.RequestNotificationPermission
 import com.example.foodapps.domain.usecases.app_entry.AppEntryUseCases
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -20,8 +21,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FoodAppsTheme{
-                AppRoot()
-
+                RequestNotificationPermission()
+                MyApp()
             }
         }
     }

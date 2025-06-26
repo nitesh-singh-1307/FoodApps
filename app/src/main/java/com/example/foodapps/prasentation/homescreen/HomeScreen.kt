@@ -66,8 +66,9 @@ val SearchBarContainerColor = Color.White // Background of the text field
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onNavigateToResturantDetails:(String) -> Unit,
+    onNavigateToFilter:() -> Unit,
     viewModel: HomeViewModel = hiltViewModel(), // Get instance via Hilt or viewModel()
-    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val categoryUiState by viewModel.categoryUiState.collectAsStateWithLifecycle()
@@ -86,7 +87,7 @@ fun HomeScreen(
         SearchSection(
             searchQuery = searchQuery,
             onSearchQueryChange = { searchQuery = it },
-            onFilterClick = { navController.navigate(Screen.Filter.route) },
+            onFilterClick = { onNavigateToFilter() },
             onSearch = { /* Handle search */ }
         )
         when (val cateState = categoryUiState) {
@@ -136,7 +137,12 @@ fun HomeScreen(
             is RestaurantListUiState.Success -> {
                 // Render categories
                 RestaurantList(
-                    navController = navController,
+                    onItemClick = {
+                        restaurant -> // Modify RestaurantList to have onItemClick
+//                        onRestaurantClick(restaurant.id) // Call the navigation callback
+                        onNavigateToResturantDetails(restaurant.id)
+//                        navController.navigate(Screen.RestaurantDetails.createRoute(restaurant.id))
+                    },
                     restaurantslist = RestaurantState.restaurants
                 )
             }
@@ -209,25 +215,28 @@ private fun CategoryHeader() {
 
 @Composable
 private fun RestaurantList(
-    navController: NavHostController,
+    onItemClick: (RestaurantFireBase) -> Unit,
     restaurantslist: List<RestaurantFireBase>
 ) {
-//    val restaurants = remember { RestaurantRepository.getRestaurants() }
-
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(restaurantslist.size) { index ->
+        items(
+            count = restaurantslist.size,
+            key = { index -> restaurantslist[index].id }
+        ) { index ->
+            val restaurant = restaurantslist[index]
             RestaurantItem(
-                restaurant = restaurantslist[index],
-                navController = navController,
-                modifier = Modifier.padding(bottom = AppTheme.size.normal)
+                restaurant = restaurant,
+                modifier = Modifier
+                    .padding(bottom = AppTheme.size.normal)
+                    .clickable { onItemClick(restaurant) },
             )
-
         }
+
     }
 }
 
@@ -235,15 +244,11 @@ private fun RestaurantList(
 fun RestaurantItem(
     restaurant: RestaurantFireBase,
     modifier: Modifier = Modifier,
-    navController: NavHostController,
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(dynamicHeight)
-            .clickable {
-                navController.navigate(Screen.RestaurantDetails.route)
-            },
+            .height(dynamicHeight),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(
             defaultElevation = AppTheme.size.small
@@ -274,7 +279,7 @@ private fun DeliveryTag(restaurant_type: Boolean) {
                 shape = MaterialTheme.shapes.small
             )
     ) {
-        if (restaurant_type){
+        if (restaurant_type) {
             Text(
                 text = stringResource(id = R.string.free_delivery),
                 style = AppTheme.typography.labelSmall,
@@ -343,9 +348,9 @@ private fun RestaurantImage(restaurant_image: String) {
 private fun HomeScreenPreview() {
     FoodAppsTheme {
         rememberNavController()
-        HomeScreen(
-            navController = rememberNavController(),
-            modifier = Modifier
-        )
+//        HomeScreen(
+//            navController = rememberNavController(),
+//            modifier = Modifier
+//        )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.foodapps.prasentation.restaurantdetails.component
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.foodapps.R
 import com.example.foodapps.data.remote.model.FeaturedItem
+import com.example.foodapps.data.remote.model.RestaurantDetails
 import com.example.foodapps.ui.theme.FoodAppsTheme
 
 @Composable
@@ -48,7 +50,9 @@ fun DirectionsButton(onClick: () -> Unit) {
 }
 
 @Composable
-fun RestaurantDetailsSubPart(modifier: Modifier) {
+fun RestaurantDetailsSubPart(modifier: Modifier,restaurantDetails: RestaurantDetails) {
+    Log.d("RestaurantDetail", "Success::::: ${restaurantDetails.address}")
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -58,10 +62,10 @@ fun RestaurantDetailsSubPart(modifier: Modifier) {
 
     ) {
         RestaurantHeader(
-            name = "Lorem Ipsum New Street",
-            hours = "12PM to 23PM",
-            status = "Open now",
-            title = "Brunch and fusion food specialists"
+            name = restaurantDetails.address,
+            hours = restaurantDetails.time,
+            status = restaurantDetails.is_available,
+            title = restaurantDetails.title
         )
         Spacer(modifier = Modifier.height(24.dp))
         DirectionsButton(onClick = { /* Handle directions button click */ })
@@ -154,12 +158,11 @@ fun FeaturedItemRow(item: FeaturedItem) {
 fun RestaurantHeader(
     name: String,
     hours: String,
-    status: String,
+    status: Boolean,
     title: String
 ) {
     Column(
         modifier = Modifier.fillMaxWidth() // Adjust the value as needed
-
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -194,11 +197,13 @@ fun RestaurantHeader(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(modifier = Modifier.width(6.dp))
-            Text(
-                text = status,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
+            if (status){
+                Text(
+                    text = "Open now",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
 
         }
         Spacer(modifier = Modifier.height(4.dp))
@@ -217,6 +222,11 @@ fun RestaurantHeader(
 @Composable
 fun RestaurantDetailsSubPartPreview() {
     FoodAppsTheme {
-        RestaurantDetailsSubPart(modifier = Modifier)
+        RestaurantDetailsSubPart(modifier = Modifier,  restaurantDetails = RestaurantDetails(
+            address = "123 Main St",
+            time = "9:00 AM - 9:00 PM",
+            is_available = true,
+            title = "Sample Restaurant"
+        ))
     }
 }

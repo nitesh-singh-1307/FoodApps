@@ -58,11 +58,11 @@ import com.example.foodapps.common.NextCommanButton
 
 //private val BackButtonPadding = PaddingValues(all = 16.dp)
 @Composable
-fun FoodOrderSummaryScreen() {
+fun FoodOrderSummaryScreen(
+
+) {
     val orderItems = listOf(
-        OrderItem("Name of the dish", 21.90, 2),
-        OrderItem("Name of the dish", 14.90, 1),
-        OrderItem("Name of the dish", 17.50, 1)
+        OrderItem("Name of the dish", 21.90, 2)
     )
     Scaffold(
         topBar = { NavigationBackButton(onBackClick = { /* Handle back button click */ },
@@ -78,7 +78,8 @@ fun FoodOrderSummaryScreen() {
             Spacer(modifier = Modifier.height(15.dp))
             FoodOrderSummaryContent(orderItems, modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.height(32.dp))
-            NextCommanButton(onClick = { /* Handle see more button click */ },
+            NextCommanButton(
+                onClick = { /* Handle see more button click */ },
                 text = "Order",
                 modifier = Modifier.fillMaxWidth()
                 )

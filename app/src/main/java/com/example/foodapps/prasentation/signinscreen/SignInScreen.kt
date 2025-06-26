@@ -63,7 +63,7 @@ fun SignInScreen(
         is AuthState.Loading -> CircularProgressIndicator()
         is AuthState.Success -> {
             Text("Login Successful")
-            LaunchedEffect(Unit) {
+            LaunchedEffect(uiState) {
                 onNavigateToMain()
             }
         }
@@ -83,112 +83,6 @@ fun SignInScreen(
             scrollState = scrollState
         )
     }
-
-//    Scaffold(
-//        topBar = {
-//            // food image
-//            Image(
-//                painter = painterResource(id = R.drawable.foodimg),
-//                contentDescription = "Login Page",
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .clip(
-//                        RoundedCornerShape(
-//                            bottomStart = 190.dp,
-//                            bottomEnd = 190.dp,
-//                            topStart = 0.dp,
-//                            topEnd = 0.dp
-//                        )
-//                    ),
-//                contentScale = ContentScale.Crop
-//            )
-//        }
-//    ) { paddingValues ->
-//        Box(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(paddingValues)
-//
-//        ) {
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .verticalScroll(verticalScroll),
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                verticalArrangement = Arrangement.spacedBy(35.dp)
-//            ) {
-//                val passwordFocus = FocusRequester()
-//                val aboutFocus = FocusRequester()
-//                Spacer(modifier = Modifier.height(5.dp))
-//                Text(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .align(Alignment.Start)
-//                        .padding(start = 33.dp),
-//                    text = stringResource(id = R.string.title_hello),
-//                    color = AppTheme.colorScheme.loginTitle,
-//                    style = AppTheme.typography.labelLarge,
-//                )
-//                // Email filed
-//                EmailInput(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(start = 33.dp, end = 33.dp),
-//                    email = email,
-//                    keyboardOptions = KeyboardOptions(
-//                        keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
-//                    ),
-//                    keyboardActions = KeyboardActions(onNext = { passwordFocus.requestFocus() }),
-//                    onEmailChanged = { email = it },
-//                )
-//                // Password filed
-//                PasswordInput(
-//                    modifier = Modifier
-//                        .focusRequester(passwordFocus)
-//                        .fillMaxWidth()
-//                        .padding(start = 33.dp, end = 33.dp),
-//                    keyboardOptions = KeyboardOptions(
-//                        imeAction = ImeAction.Next
-//                    ),
-//                    keyboardActions = KeyboardActions(onNext = { aboutFocus.requestFocus() }),
-//                    password = password,
-//                    onPasswordChanged = { password = it },
-//                )
-//                // Login button
-//                PrimaryButton(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(start = 24.dp, end = 24.dp),
-//                    label = stringResource(id = R.string.str_login_button),
-//                    onClick = { onNavigateToMain },
-//                    enabled = loginState !is LoginState.Loading
-//
-//                )
-//                // forgot password
-//                Text(
-//                    modifier = Modifier.clickable { },
-//                    text = stringResource(id = R.string.str_forgot_password),
-//                    color = AppTheme.colorScheme.loginTitle,
-//                    style = AppTheme.typography.labelLarge
-//                )
-//                Row {
-//                    Text(
-//                        text = stringResource(id = R.string.str_dont_have_account),
-//                        color = AppTheme.colorScheme.secondary,
-//                        style = AppTheme.typography.labelLarge
-//                    )
-//                    Spacer(modifier = Modifier.width(2.dp))
-//                    Text(
-//                        modifier = Modifier.clickable { onNavigateToSignUp() },
-//                        text = stringResource(id = R.string.str_sign_up),
-//                        color = AppTheme.colorScheme.loginTitle,
-//                        style = AppTheme.typography.labelLarge
-//                    )
-//                }
-//
-//            }
-//        }
-//    }
 
 }
 
@@ -342,11 +236,23 @@ private fun SignUpPrompt(onNavigateToSignUp: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
+@Composable
+fun AuthorScreen(
+    signInViewModel: LoginViewModel = hiltViewModel(),
+    onNavigateToMain: () -> Unit,
+    onNavigateToSignUp: () -> Unit
+) {
+//    SignInScreen(
+//        onNavigateToMain = {},
+//        onNavigateToSignUp = {}
+//    )
+}
+
+@Preview(showBackground = true, device = "id:pixel_5", apiLevel = 35)
 @Composable
 private fun SignInScreenPreview() {
     FoodAppsTheme {
-        SignInScreen(
+        AuthorScreen(
             onNavigateToMain = {},
             onNavigateToSignUp = {}
         )
