@@ -22,8 +22,6 @@ A sample food delivery application for a coffee shop.
 
 ## Screenshots
 <p align="center">
-  ![food_delivery_screen](https://github.com/user-attachments/assets/087ca8db-e0af-4927-b248-f2a5f525c5b0)
-  ![part2](https://github.com/user-attachments/assets/78f2b427-194e-4dde-8254-0d4e51c4f40e)
-
+<img src="images/food_delivery_screen.png" alt="JustJava Screenshots" width="800">
 
 </p>
