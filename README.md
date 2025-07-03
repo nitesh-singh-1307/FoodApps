@@ -21,7 +21,4 @@ A sample food delivery application for a coffee shop.
 - Firebase: For messaging and authentication
 
 ## Screenshots
-<p align="center">
-<img src="images/food_delivery_screen.png" alt="JustJava Screenshots" width="800">
 
-</p>
