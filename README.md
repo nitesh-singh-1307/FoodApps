@@ -22,5 +22,5 @@ A sample food delivery application for a coffee shop.
 
 ## Screenshots
 <p align="center">
-  <img src="images/just_java_logo.png" alt="Description of your image">
+  <img src="images/food_delivery_screen.png" alt="Description of your image">
 </p>
