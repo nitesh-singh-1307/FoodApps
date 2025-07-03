@@ -22,11 +22,5 @@ A sample food delivery application for a coffee shop.
 
 ## Screenshots
 <p align="center">
-  <img src="images/part1.png" alt="Part 1" width="200">
-  <img src="images/part2.png" alt="Part 2" width="200">
-  <img src="images/part3.png" alt="Part 3" width="200">
-  <img src="images/part4.png" alt="Part 4" width="200">
-  <img src="images/part5.png" alt="Part 5" width="200">
-  <img src="images/part6.png" alt="Part 4" width="200">
-  <img src="images/part7.png" alt="Part 5" width="200">
+  <img src="images/part1.png" alt="Part 1">
 </p>
