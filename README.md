@@ -23,7 +23,6 @@ A sample food delivery application for a coffee shop.
 
 ## Screenshots
 <p align="center">
-  <img src="images/food_delivery_screen.png" alt="Part 1">
   <img src="images/part2.png" alt="Part 2" width="200">
   <img src="images/part3.png" alt="Part 3" width="200">
   <img src="images/part4.png" alt="Part 4" width="200">
@@ -33,5 +32,6 @@ A sample food delivery application for a coffee shop.
   <img src="images/part8.png" alt="Part 8" width="200">
   <img src="images/part9.png" alt="Part 9" width="200">
   <img src="images/part10.png" alt="Part 10" width="200">
+  <img src="images/food_delivery_screen.png" alt="Part 1"  width="200">
 </p>
 
