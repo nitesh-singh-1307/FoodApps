@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <p align="center">
   <img src="images/just_java_logo.png" alt="Description of your image">
 </p>
@@ -22,8 +22,16 @@ A sample food delivery application for a coffee shop.
 - Firebase: For messaging and authentication
 
 ## Screenshots
+<p align="center">
+  <img src="images/food_delivery_screen.png" alt="Part 1">
+  <img src="images/part2.png" alt="Part 2" width="200">
+  <img src="images/part3.png" alt="Part 3" width="200">
+  <img src="images/part4.png" alt="Part 4" width="200">
+  <img src="images/part5.png" alt="Part 5" width="200">
+  <img src="images/part6.png" alt="Part 4" width="200">
+  <img src="images/part7.png" alt="Part 5" width="200">
+  <img src="images/part8.png" alt="Part 8" width="200">
+  <img src="images/part9.png" alt="Part 9" width="200">
+  <img src="images/part10.png" alt="Part 10" width="200">
+</p>
 
-=======
-Food Delivery 
-![just_java_logo](https://github.com/user-attachments/assets/8318acd0-f263-4ef4-abbc-00b1b8b6c5d3)
->>>>>>> d1f8495c966827086b8490111f2c6b596b049e7e
