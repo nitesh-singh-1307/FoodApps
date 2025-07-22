@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
   <img src="images/just_java_logo.png" alt="Description of your image">
 </p>
@@ -22,3 +23,7 @@ A sample food delivery application for a coffee shop.
 
 ## Screenshots
 
+=======
+Food Delivery 
+![just_java_logo](https://github.com/user-attachments/assets/8318acd0-f263-4ef4-abbc-00b1b8b6c5d3)
+>>>>>>> d1f8495c966827086b8490111f2c6b596b049e7e
